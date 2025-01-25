@@ -35,7 +35,7 @@ public class ClimbSubsystem extends SubsystemBase {
     // construction, the timeout can be long without blocking robot operation. Code
     // which sets or gets parameters during operation may need a shorter timeout.
     rollerMotor.setCANTimeout(250);
-
+    rollerMotor.getAbsoluteEncoder();
     // Create and apply configuration for roller motor. Voltage compensation helps
     // the roller behave the same as the battery
     // voltage dips. The current limit helps prevent breaker trips or burning out
