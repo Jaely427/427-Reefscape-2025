@@ -51,17 +51,14 @@ public final class Constants {
  public static final class ClimbConstants {
     public static final int ClimbGearRatio=100;
     public static final int EncoaderConstant=42; 
-    public static final double kS=0;
-    public static final double kA=0;
-    public static final double kV=0;
-    public static final double kG=9.92;
+    public static final double kS=0; // the 
+    public static final double kA=0; // the acceleration
+    public static final double kV=0; // the velocity applied
+    public static final double kG=9.92; // the counter gravity
     public static final float kForwardSoftLimit=0;
-    public static final float kReverseSoftLimit=0;
-    public static final boolean kRightMotorInverted=true;
-    public static final double kAbsPositionConversionFactor=0;
-    public static final double kAbsVelocityConversionFactor=0;
-    public static final double kRelativePositionConversionFactor=0;
-    public static final double kRelativeVelocityConversionFactor=0;
+    public static final float kReverseSoftLimit=180;
+    public static final double kAbsPositionConversionFactor=360;
+    public static final double kRelativePositionConversionFactor=360;
     public static final int kMotorCurrentLimit=0;
     public static final boolean kLeftMotorInverted=true;
     public static final double kP=0;
@@ -72,7 +69,7 @@ public final class Constants {
     public static final int kArmMotorLeftId=0;
     public static final double kTolerance=0;
     public static final double kGroundPosition=0;
-    
+
 
 
     

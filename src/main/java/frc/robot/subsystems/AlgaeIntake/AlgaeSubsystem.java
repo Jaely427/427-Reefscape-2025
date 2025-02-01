@@ -5,22 +5,29 @@
 package frc.robot.subsystems.AlgaeIntake;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 import frc.robot.Constants.RollerConstants;
+
+import com.revrobotics.RelativeEncoder;
 import com.revrobotics.spark.SparkMax;
 import com.revrobotics.spark.SparkBase.PersistMode;
 import com.revrobotics.spark.SparkBase.ResetMode;
 import com.revrobotics.spark.SparkLowLevel.MotorType;
 import com.revrobotics.spark.config.SparkMaxConfig;
 
-/** Class to run the rollers over CAN */
+/** Class to run the rollers over the wire standard the yellow and green serial connection (CAN) */
 public class AlgaeSubsystem extends SubsystemBase {
   
-  private final SparkMax rollerMotor;
+  private final SparkMax IntakeMotor;
   private AlgaeSubsystem() {
-    rollerMotor = new SparkMax(RollerConstants.ROLLER_MOTOR_ID, MotorType.kBrushed);
+    IntakeMotor = new SparkMax(RollerConstants.ROLLER_MOTOR_ID, MotorType.kBrushed);
+    SparkMax OuttakeMotor = new SparkMax(Constants.RollerConstants, MotorType.kBrushless);
+   
    // This funtions will set up the motors and encoders
-   setupmotors();
-   // Add Encoders
+   setupmotors();  
+   RelativeEncoder IntakeMotorEncoder = IntakeMotor.getEncoder ();
+   RelativeEncoder OutakeMotorEncoder = OuttakeMotor
+
    // Add PID controller
    // Add feedforward
    // Add limit switch
@@ -34,7 +41,7 @@ public class AlgaeSubsystem extends SubsystemBase {
     // Set can timeout. Because this project only sets parameters once on
     // construction, the timeout can be long without blocking robot operation. Code
     // which sets or gets parameters during operation may need a shorter timeout.
-    rollerMotor.setCANTimeout(250);
+    IntakeMotor.setCANTimeout(250);
 
     // Create and apply configuration for roller motor. Voltage compensation helps
     // the roller behave the same as the battery
@@ -43,7 +50,7 @@ public class AlgaeSubsystem extends SubsystemBase {
     SparkMaxConfig rollerConfig = new SparkMaxConfig();
     rollerConfig.voltageCompensation(RollerConstants.ROLLER_MOTOR_VOLTAGE_COMP);
     rollerConfig.smartCurrentLimit(RollerConstants.ROLLER_MOTOR_CURRENT_LIMIT);
-    rollerMotor.configure(rollerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
+    IntakeMotor.configure(rollerConfig, ResetMode.kResetSafeParameters, PersistMode.kPersistParameters);
   }
   @Override
   public void periodic() {
@@ -51,6 +58,6 @@ public class AlgaeSubsystem extends SubsystemBase {
 
   /** This is a method that makes the roller spin */
   public void runRoller(double forward, double reverse) {
-    rollerMotor.set(forward - reverse);
+    IntakeMotor.set(forward - reverse);
   }
 }
